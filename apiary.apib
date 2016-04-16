@@ -1,0 +1,607 @@
+FORMAT: 1A
+HOST: https://admin.duos-croatia.com/api/v1/
+
+# Duos
+
+Duos is a simple multilingual API allowing consumers to view properties and trips.
+
+## Caching
+
+All endpoints mentioned in this document have their data cached for duration of 1h to 24h.
+
+## Authorization
+
+All API endpoints mentioned in this document require authorization. You need to obtain a `token` from site administrator and then you send that token in header of each request like so:
+
+```
+Authorization: Bearer your-token-here
+```
+
+## Localization
+
+This API has support for multilingual content. By default the API locale is `hr`. But you can ask for content in different locale if supported by using `?locale=en`.
+
+Supported locales:
+
+- en
+- hr (default)
+
+## Group Properties
+
+Here you will find info about endpoints related to properties.
+
+### Property [/properties/{slug}{?locale}{?include}]
+
+This endpoint returns a single property. 
+By default it does not return images, blueprints and rents data. 
+You have to ask for them specifically by using `&include=images,blueprints,rents`.
+
+
++ Parameters
+    + slug (string) - The slug of the property you want to view.
+    + locale (optional, string) - The locale on which you want the response to be. The default is `hr`.
+    + include (optional, string) - Items that should be included in the result. Can be: images, blueprints, rents.
+
+
+#### View a Property Detail [GET]
+
+If you want to fetch data for a single property this is what you will want to use.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer your-token-here
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "area": 18,
+                    "bathrooms": 1,
+                    "bedrooms": 0,
+                    "build_year": 2015,
+                    "city": "Šibenik",
+                    "code": "Š113AP",
+                    "description": "<p>U studio apartmanu Casa Marina nalazi se kauč na razvlačenje za dvije osobe, stol za jelo za dvije osobe, televizija, komoda i kupaonica. Apartman se nalazi u prizemlju i na terasi ima stol i stolice ako se želi sjesti na zrak gdje je terasa koja omogućava hlad tijekom ljetnih vrućih dana.</p>\r\n\r\n<p>Za hlađenje tu je podni ventilator ( rotirajući ) te za grijanje pomična peć na struju.&nbsp;</p>\r\n\r\n<p>U apartmanu Vas čeka sve spremno, posteljina i ručnici za kupaonicu.</p>\r\n",
+                    "duos": false,
+                    "excerpt": "Studio apartman u samoj jezgri Šibenika za max dvije osobe",
+                    "featured": false,
+                    "slideshow": true,
+                    "floors": 0,
+                    "for_rent": true,
+                    "for_sale": false,
+                    "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113/cover-large.jpg",
+                    "murterin": true,
+                    "plot": 18,
+                    "price": 0,
+                    "slug": "113-Šibenik-apartment",
+                    "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113/cover-small.jpg",
+                    "type": "apartman",
+                    "tags": {
+                        "data": [
+                            {
+                                "name": "frižider"
+                            },
+                            {
+                                "name": "televizor"
+                            },
+                            {
+                                "name": "internet"
+                            },
+                            {
+                                "name": "zabranjeno pušenje"
+                            },
+                            {
+                                "name": "blizina plaže"
+                            },
+                            {
+                                "name": "terasa"
+                            },
+                            {
+                                "name": "prvi red do mora"
+                            },
+                            {
+                                "name": "studio apartman"
+                            }
+                        ]
+                    },
+                    "images": {
+                        "data": [
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4323_4_5.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4323_4_5.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4323_4_5.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4323_4_5.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4320_1_2.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4320_1_2.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4320_1_2.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4320_1_2.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4314_5_6.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4314_5_6.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4314_5_6.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4314_5_6.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4308_09_10.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4308_09_10.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4308_09_10.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4308_09_10.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4326_7_8.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4326_7_8.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4326_7_8.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4326_7_8.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4338_39_40.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4338_39_40.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4338_39_40.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4338_39_40.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4347_8_9.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4347_8_9.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4347_8_9.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4347_8_9.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4350_1_2.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4350_1_2.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4350_1_2.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4350_1_2.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4329_30_31.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4329_30_31.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4329_30_31.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4329_30_31.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4819_20_21.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4819_20_21.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4819_20_21.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4819_20_21.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4807_8_9.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4807_8_9.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4807_8_9.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4807_8_9.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4768_69_70.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4768_69_70.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4768_69_70.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4768_69_70.jpg"
+                            }
+                        ]
+                    },
+                    "blueprints": {
+                        "data": [
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fnacrti/studio2.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fnacrti/thumb_studio2.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fnacrti/murterin_studio2.jpg",
+                                "murterin_thumbnail": null
+                            }
+                        ]
+                    },
+                    "rents": {
+                        "data": [
+                            {
+                                "from": "03-01-2016",
+                                "to": "07-05-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "07-05-2016",
+                                "to": "04-06-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "04-06-2016",
+                                "to": "25-06-2016",
+                                "price": "35.00"
+                            },
+                            {
+                                "from": "25-06-2016",
+                                "to": "02-07-2016",
+                                "price": "40.00"
+                            },
+                            {
+                                "from": "02-07-2016",
+                                "to": "20-08-2016",
+                                "price": "45.00"
+                            },
+                            {
+                                "from": "20-08-2016",
+                                "to": "03-09-2016",
+                                "price": "40.00"
+                            },
+                            {
+                                "from": "03-09-2016",
+                                "to": "24-09-2016",
+                                "price": "35.00"
+                            },
+                            {
+                                "from": "24-09-2016",
+                                "to": "15-10-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "15-10-2016",
+                                "to": "21-12-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "21-12-2016",
+                                "to": "02-01-2017",
+                                "price": "35.00"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+
+
+### Property Collection [/properties{?locale}{?take}{?include}]
+
+Endpoints related to property collection are located here.
+
+#### List All Properties [GET]
+
+This action returns all properties in desired locale. If you want you can tell the API to return only the
+desired amount of items. By default it does not return images, blueprints and rents data. 
+You have to ask for them specifically by using `&include=images,blueprints,rents`.
+
++ Parameters
+    + locale (optional, string) - The locale on which you want the response to be. The default is `hr`.
+    + take (optional, integer) - How many items the endpoint should return.
+    + include (optional, string) - Items that should be included in the result. Can be: images, blueprints, rents.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer your-token-here
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "area": 18,
+                    "bathrooms": 1,
+                    "bedrooms": 0,
+                    "build_year": 2015,
+                    "city": "Šibenik",
+                    "code": "Š113AP",
+                    "description": "<p>U studio apartmanu Casa Marina nalazi se kauč na razvlačenje za dvije osobe, stol za jelo za dvije osobe, televizija, komoda i kupaonica. Apartman se nalazi u prizemlju i na terasi ima stol i stolice ako se želi sjesti na zrak gdje je terasa koja omogućava hlad tijekom ljetnih vrućih dana.</p>\r\n\r\n<p>Za hlađenje tu je podni ventilator ( rotirajući ) te za grijanje pomična peć na struju.&nbsp;</p>\r\n\r\n<p>U apartmanu Vas čeka sve spremno, posteljina i ručnici za kupaonicu.</p>\r\n",
+                    "duos": false,
+                    "excerpt": "Studio apartman u samoj jezgri Šibenika za max dvije osobe",
+                    "featured": false,
+                    "slideshow": true,
+                    "floors": 0,
+                    "for_rent": true,
+                    "for_sale": false,
+                    "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113/cover-large.jpg",
+                    "murterin": true,
+                    "plot": 18,
+                    "price": 0,
+                    "slug": "113-Šibenik-apartment",
+                    "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113/cover-small.jpg",
+                    "type": "apartman",
+                    "tags": {
+                        "data": [
+                            {
+                                "name": "frižider"
+                            },
+                            {
+                                "name": "televizor"
+                            },
+                            {
+                                "name": "internet"
+                            },
+                            {
+                                "name": "zabranjeno pušenje"
+                            },
+                            {
+                                "name": "blizina plaže"
+                            },
+                            {
+                                "name": "terasa"
+                            },
+                            {
+                                "name": "prvi red do mora"
+                            },
+                            {
+                                "name": "studio apartman"
+                            }
+                        ]
+                    },
+                    "images": {
+                        "data": [
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4323_4_5.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4323_4_5.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4323_4_5.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4323_4_5.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4320_1_2.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4320_1_2.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4320_1_2.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4320_1_2.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4314_5_6.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4314_5_6.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4314_5_6.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4314_5_6.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4308_09_10.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4308_09_10.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4308_09_10.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4308_09_10.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4326_7_8.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4326_7_8.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4326_7_8.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4326_7_8.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4338_39_40.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4338_39_40.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4338_39_40.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4338_39_40.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4347_8_9.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4347_8_9.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4347_8_9.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4347_8_9.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4350_1_2.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4350_1_2.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4350_1_2.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4350_1_2.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4329_30_31.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4329_30_31.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4329_30_31.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4329_30_31.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4819_20_21.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4819_20_21.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4819_20_21.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4819_20_21.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4807_8_9.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4807_8_9.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4807_8_9.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4807_8_9.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/IMG_4768_69_70.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/thumb_IMG_4768_69_70.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_IMG_4768_69_70.jpg",
+                                "murterin_thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fslike/murterin_thumb_IMG_4768_69_70.jpg"
+                            }
+                        ]
+                    },
+                    "blueprints": {
+                        "data": [
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fnacrti/studio2.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fnacrti/thumb_studio2.jpg",
+                                "murterin_image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fnekretnine%2F113%2Fnacrti/murterin_studio2.jpg",
+                                "murterin_thumbnail": null
+                            }
+                        ]
+                    },
+                    "rents": {
+                        "data": [
+                            {
+                                "from": "03-01-2016",
+                                "to": "07-05-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "07-05-2016",
+                                "to": "04-06-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "04-06-2016",
+                                "to": "25-06-2016",
+                                "price": "35.00"
+                            },
+                            {
+                                "from": "25-06-2016",
+                                "to": "02-07-2016",
+                                "price": "40.00"
+                            },
+                            {
+                                "from": "02-07-2016",
+                                "to": "20-08-2016",
+                                "price": "45.00"
+                            },
+                            {
+                                "from": "20-08-2016",
+                                "to": "03-09-2016",
+                                "price": "40.00"
+                            },
+                            {
+                                "from": "03-09-2016",
+                                "to": "24-09-2016",
+                                "price": "35.00"
+                            },
+                            {
+                                "from": "24-09-2016",
+                                "to": "15-10-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "15-10-2016",
+                                "to": "21-12-2016",
+                                "price": "30.00"
+                            },
+                            {
+                                "from": "21-12-2016",
+                                "to": "02-01-2017",
+                                "price": "35.00"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+        
+## Group Trips        
+
+Here you will find info about endpoints related to trips.
+        
+        
+### Trip [/trips/{slug}{?locale}{?include}]
+
+This endpoint returns a single trip. 
+By default it does not return images data. 
+You have to ask for them specifically by using `&include=images`.
+
++ Parameters
+    + slug (string) - The slug of the property you want to view.
+    + locale (optional, string) - The locale on which you want the response to be. The default is `hr`.
+    + include (optional, string) - Items that should be included in the result. Can be: images.
+
+
+#### View a Trip Detail [GET]
+
+If you want to fetch data for a single trip this is what you will want to use.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer your-token-here
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "description": "<p>S obzirom na to da se na malom području oko otoka Murtera nalazi preko 150 različitih otoka i otočića, najam glisera je nezaobilazan. I u dane najvi&scaron;e sezone i najveće gužve na plažama, uz najam plovila vrlo lako ćete naći na mir i ti&scaron;inu u prekrasnim nedirnutim uvalicama na nekim od mnogobrojnih otoka.</p>\r\n\r\n<p><br />\r\nU ponudi se nalazi preko dvadeset plovila različitih tipova, veličina i snage motora za svačiji ukus i potrebe, a moguće ih je unajmiti sa ili bez vozača. Sva plovila u na&scaron;oj ponudi su najnovije proizvodnje, i osigurana su.</p>\r\n\r\n<p><strong><em>Svako od plovila opskrbljeno je sa</em></strong>:<span style=\"line-height: 1.6;\">prslucima za spa&scaron;avanje,</span><span style=\"line-height: 1.6;\">veslima i pomorskim kartama, a od na&scaron;ih djelatnika moguće je dobiti sve upute o upravljanju, te prijedloge za atraktivne destinacije.</span></p>\r\n",
+                    "featured": false,
+                    "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter/cover.jpg",
+                    "slug": "rent_a_boat_murter",
+                    "title": "Najam glisera",
+                    "tags": {
+                        "data": [
+                            {
+                                "name": "najam"
+                            }
+                        ]
+                    },
+                    "images": {
+                        "data": [
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/damor-900-furia-06.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_damor-900-furia-06.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/hpim0648.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_hpim0648.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/hpim0643.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_hpim0643.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/gliser-cobalt-200-7-metara.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_gliser-cobalt-200-7-metara.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/hpim5657.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_hpim5657.jpg"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+
+
+### Trip Collection [/trips{?locale}{?take}{?include}]
+
+Endpoints related to trip collection are located here.
+
+#### List All Trips [GET]
+
+This action returns all trips in desired locale. If you want you can tell the API to return only the
+desired amount of items. By default it does not return images data. 
+You have to ask for them specifically by using `&include=images`.
+
++ Parameters
+    + locale (optional, string) - The locale on which you want the response to be. The default is `hr`.
+    + take (optional, integer) - How many items the endpoint should return.
+    + include (optional, string) - Items that should be included in the result. Can be: images.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer your-token-here
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "description": "<p>S obzirom na to da se na malom području oko otoka Murtera nalazi preko 150 različitih otoka i otočića, najam glisera je nezaobilazan. I u dane najvi&scaron;e sezone i najveće gužve na plažama, uz najam plovila vrlo lako ćete naći na mir i ti&scaron;inu u prekrasnim nedirnutim uvalicama na nekim od mnogobrojnih otoka.</p>\r\n\r\n<p><br />\r\nU ponudi se nalazi preko dvadeset plovila različitih tipova, veličina i snage motora za svačiji ukus i potrebe, a moguće ih je unajmiti sa ili bez vozača. Sva plovila u na&scaron;oj ponudi su najnovije proizvodnje, i osigurana su.</p>\r\n\r\n<p><strong><em>Svako od plovila opskrbljeno je sa</em></strong>:<span style=\"line-height: 1.6;\">prslucima za spa&scaron;avanje,</span><span style=\"line-height: 1.6;\">veslima i pomorskim kartama, a od na&scaron;ih djelatnika moguće je dobiti sve upute o upravljanju, te prijedloge za atraktivne destinacije.</span></p>\r\n",
+                    "featured": false,
+                    "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter/cover.jpg",
+                    "slug": "rent_a_boat_murter",
+                    "title": "Najam glisera",
+                    "tags": {
+                        "data": [
+                            {
+                                "name": "najam"
+                            }
+                        ]
+                    },
+                    "images": {
+                        "data": [
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/damor-900-furia-06.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_damor-900-furia-06.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/hpim0648.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_hpim0648.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/hpim0643.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_hpim0643.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/gliser-cobalt-200-7-metara.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_gliser-cobalt-200-7-metara.jpg"
+                            },
+                            {
+                                "image": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/hpim5657.jpg",
+                                "thumbnail": "https://s3-us-west-2.amazonaws.com/duos-croatia%2Fizleti%2Frent_a_boat_murter%2Fslike/thumb_hpim5657.jpg"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
